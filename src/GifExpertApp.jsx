@@ -1,23 +1,35 @@
 import { useState } from "react";
 import { AddCategory } from "./components/AddCategory";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { GifGrid } from "./components/GifGrid";
 
 export const GifExpertApp = () => {
+  const [categories, setCategories] = useState([]);
+  const onAddCategory = (newCategory) => {
+    if (!categories.includes(newCategory)) {
+      setCategories([...categories, newCategory]);
+    } else {
+      Swal.fire({
+        title: "Esta categoria ya existe",
+        icon: "info",
+        background: "#fff",
 
-  const [categories, setCategories] = useState(['One punch', 'Samurai X', 'Dragon Ball' ])
-  const onAddCategory = () => {
-    setCategories([...categories, 'HunterXHunter'])
-  }
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
 
   return (
     <>
       <h1>GifExpertApp</h1>
-      <AddCategory onAddCategory = {setCategories} />
+      <AddCategory onNewValue={onAddCategory} />
       {/*<button onClick={onAddCategory}>Agregar</button>*/}
-      <ul>
-          {categories.map( (categoria, index) => {
-            return <li key={index}>{categoria}</li>
-          })}
-      </ul>
+      <div>
+        {categories.map((categoria) => (
+          <GifGrid key={categoria} category={categoria} />
+        ))}
+      </div>
     </>
   );
 };

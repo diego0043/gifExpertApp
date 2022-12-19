@@ -1,6 +1,8 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-export const AddCategory = ({ onAddCategory }) => {
+export const AddCategory = ({ onNewValue }) => {
   const [inputValue, setInputValue] = useState("");
 
   const onInputChange = (e) => {
@@ -10,10 +12,17 @@ export const AddCategory = ({ onAddCategory }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim().length >= 1) {
-      onAddCategory((categories) => [...categories, inputValue]);
+      onNewValue(inputValue);
       setInputValue("");
     } else {
-      console.log("Ingrese un valor");
+
+      Swal.fire({
+        title: 'Debes escribir una categoria',
+        icon: 'info',
+        background: '#fff',
+        confirmButtonText: 'Aceptar'
+
+      })
     }
   };
   return (
