@@ -8,7 +8,7 @@ export const GifExpertApp = () => {
   const [categories, setCategories] = useState([]);
   const onAddCategory = (newCategory) => {
     if (!categories.includes(newCategory)) {
-      setCategories([...categories, newCategory]);
+      setCategories([newCategory, ...categories]);
     } else {
       Swal.fire({
         title: "Esta categoria ya existe",
