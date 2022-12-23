@@ -27,7 +27,8 @@ export const AddCategory = ({ onNewValue }) => {
   };
   return (
     <form onSubmit={onSubmit}>
-      <input
+      <input 
+        className="input"
         type="text"
         placeholder="Search a gif"
         value={inputValue}
